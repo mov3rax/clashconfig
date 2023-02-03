@@ -116,6 +116,7 @@ proxy-groups:
           - ssat
           - aznt
           - alat
+          - ssst
           - DIRECT
     - name: mixt
       type: url-test
@@ -198,9 +199,9 @@ proxy-providers:
 
     sssp:
         type: http
-        url: "https://raw.githubusercontent.com/aliahmadiALA/SurfShark_ALA/main/"
+        url: "https://raw.githubusercontent.com/ssrsub/ssr/master/Clash.yml"
         interval: 3600
-        path: ./ala.yaml
+        path: ./sss.yaml
         health-check:
             enable: true
             interval: 600
