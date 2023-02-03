@@ -1,0 +1,196 @@
+mixed-port: 9090
+allow-lan: true
+bind-address: "*"
+mode: rule
+# log-level: info
+log-level: error
+ipv6: true
+# external-controller: 0.0.0.0:3050
+
+profile:
+    store-selected: false
+    store-fake-ip: true
+
+dns:
+    enable: true
+    listen: 0.0.0.0:9091
+    ipv6: true
+    default-nameserver:
+        - 1.1.1.1
+        - 8.8.8.8
+    enhanced-mode: fake-ip
+    nameserver:
+        - https://basic.rethinkdns.com/dns-query
+        - https://NoTMIKE.dev/dns.php
+        - tls://one.one.one.one:853
+        - tls://dns.google:853
+        - https://dns.google/dns-query
+        - https://cloudflare-dns.com/dns-query
+        - https://dns.adguard.com/dns-query
+        - https://doh-de.blahdns.com/dns-query
+    fallback:
+        - https://basic.rethinkdns.com/dns-query
+        - https://azure.cloudflare-dns.com/dns-query
+        - https://dns64.cloudflare-dns.com/dns-query
+        - https://dns1.ryan-palmer.com/dns-query
+        - https://odvr.nic.cz/dns-query
+        - https://doh.crypto.sx/dns-query
+        - https://puredns.org/dns-query
+        - https://dns.dnshome.de/dns-query
+        - https://doh.seby.io:8443/dns-query
+        - https://ibksturm.synology.me/dns-query
+        - https://dns.hostux.net/dns-query
+        - https://doh.libredns.gr/dns-query
+        - https://NoTMIKE.dev/dns.php
+        - https://doh.42l.fr/dns-query
+        - https://DNS.HeN.ee/dns-query
+        - https://doh.dnswarden.com/uncensored
+        - tls://one.one.one.one:853
+        - tls://dns.google:853
+        - https://dns.google/dns-query
+        - https://dns64.dns.google/dns-query
+        - https://8888.google/dns-query
+        - https://cloudflare-dns.com/dns-query
+        - https://dns.quad9.net/dns-query
+        - https://mozilla.cloudflare-dns.com/dns-query
+        - https://EU2.DNS.LAVATE.CH/dns-query
+        - https://DANDELIONSPROUT.Asuscomm.com:2501/dns-query
+        - https://dns.switch.ch/dns-query
+        - https://dnsforge.de/dns-query
+        - https://dns.adguard.com/dns-query
+        - https://doh-de.blahdns.com/dns-query
+    fallback-filter:
+        geoip: true
+        geoip-code: IR
+        ipcidr:
+            - 240.0.0.0/4
+            - 0.0.0.0/32
+            - 127.0.0.1/32
+        domain:
+            - +.google.com
+            - +.facebook.com
+            - +.youtube.com
+            - +.gvt1.com
+            - "+.facebook.com"
+            - "+.twitter.com"
+            - "+.youtube.com"
+            - "+.bing.com"
+    fake-ip-filter:
+        - "*.lan"
+        - stun.*.*.*
+        - stun.*.*
+        - time.windows.com
+        - time.nist.gov
+        - time.apple.com
+        - time.asia.apple.com
+        - "*.openwrt.pool.ntp.org"
+        - pool.ntp.org
+        - ntp.ubuntu.com
+        - time1.apple.com
+        - time2.apple.com
+        - time3.apple.com
+        - time4.apple.com
+        - time5.apple.com
+        - time6.apple.com
+        - time7.apple.com
+        - time1.google.com
+        - time2.google.com
+        - time3.google.com
+        - time4.google.com
+        - api.joox.com
+        - joox.com
+        - "*.xiami.com"
+        - "*.msftconnecttest.com"
+        - "*.msftncsi.com"
+        - "*.*.stun.playstation.net"
+        - xbox.*.*.microsoft.com
+        - "*.ipv6.microsoft.com"
+        - speedtest.cros.wr.pvp.net
+
+proxy-groups:
+    - name: all
+      type: select
+      proxies:
+          - mixt
+        #   - mmct
+          - ssat
+          - aznt
+          - alat
+          - DIRECT
+    - name: mixt
+      type: url-test
+      use:
+        #   - mmcp
+          - ssap
+          - aznp
+          - alap
+      url: http://cp.cloudflare.com/
+      interval: 300
+    # - name: mmct
+    #   type: url-test
+    #   use:
+    #       - mmcp
+    #   url: http://cp.cloudflare.com/
+    #   interval: 300
+    - name: ssat
+      type: url-test
+      use:
+          - ssap
+      url: http://cp.cloudflare.com/
+      interval: 300
+    - name: aznt
+      type: url-test
+      use:
+          - aznp
+      url: http://cp.cloudflare.com/
+      interval: 300
+    - name: alat
+      type: url-test
+      use:
+          - alap
+      url: http://cp.cloudflare.com/
+      interval: 300
+
+proxy-providers:
+    # mmcp:
+    #     type: http
+    #     url: "https://raw.githubusercontent.com/mehdimoghaddam-cell/clash-subscription/main/mehdimoghaddam-cell.yaml"
+    #     interval: 3600
+    #     path: ./mmc.yaml
+    #     health-check:
+    #         enable: true
+    #         interval: 600
+    #         url: http://cp.cloudflare.com/
+    ssap:
+        type: http
+        url: "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.yml"
+        interval: 3600
+        path: ./ssa.yaml
+        health-check:
+            enable: true
+            interval: 600
+            url: http://cp.cloudflare.com/
+    aznp:
+        type: http
+        url: "https://raw.githubusercontent.com/AzadNetCH/Clash/main/AzadNet.yml"
+        interval: 3600
+        path: ./azn.yaml
+        health-check:
+            enable: true
+            interval: 600
+            url: http://cp.cloudflare.com/
+    alap:
+        type: http
+        url: "https://raw.githubusercontent.com/aliahmadiALA/SurfShark_ALA/main/(SurfShark_ALA).yaml"
+        interval: 3600
+        path: ./ala.yaml
+        health-check:
+            enable: true
+            interval: 600
+            url: http://cp.cloudflare.com/
+
+rules:
+    - DOMAIN-SUFFIX,local,DIRECT
+    - DOMAIN-SUFFIX,ir,DIRECT
+    - GEOIP,IR,DIRECT
+    - MATCH,all
