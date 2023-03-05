@@ -1,14 +1,12 @@
-mixed-port: 9090
-allow-lan: true
-bind-address: "*"
+mixed-port: 7890
+allow-lan: false
 mode: rule
-# log-level: info
 log-level: error
 ipv6: true
-# external-controller: 0.0.0.0:3050
+external-controller: 0.0.0.0:9090
 
 profile:
-    store-selected: false
+    store-selected: true
     store-fake-ip: true
 
 dns:
@@ -66,6 +64,16 @@ dns:
             - 240.0.0.0/4
             - 0.0.0.0/32
             - 127.0.0.1/32
+            - 10.0.0.0/8
+            - 100.64.0.0/10
+            - 169.254.0.0/16
+            - 172.16.0.0/12
+            - 192.0.0.0/24
+            - 198.18.0.0/15
+            - 240.0.0.0/4
+            - 64:ff9b:1::/48
+            - fc00::/7
+            - fe80::/64
         domain:
             - +.google.com
             - +.facebook.com
@@ -112,63 +120,55 @@ proxy-groups:
       type: select
       proxies:
           - mixt
-        #   - mmct
+          - "fallback-auto"
+          - manual
           - ssat
           - aznt
-          - alat
-          - ssst
+          - anat
           - DIRECT
     - name: mixt
       type: url-test
       use:
-        #   - mmcp
           - ssap
           - aznp
-          - alap
-          - sssp
+          - anap
       url: http://cp.cloudflare.com/
       interval: 300
-    # - name: mmct
-    #   type: url-test
-    #   use:
-    #       - mmcp
-    #   url: http://cp.cloudflare.com/
-    #   interval: 300
+      tolerance: 1000
+      lazy: true
+    - name: "fallback-auto"
+        type: fallback
+        url: http://cp.cloudflare.com/
+        interval: 5
+        tolerance: 1000
+        lazy: false
+    proxies
     - name: ssat
       type: url-test
       use:
           - ssap
       url: http://cp.cloudflare.com/
       interval: 300
+      tolerance: 1000
+      lazy: true
     - name: aznt
       type: url-test
       use:
           - aznp
       url: http://cp.cloudflare.com/
       interval: 300
-    - name: alat
+      tolerance: 1000
+      lazy: true
+    - name: anat
       type: url-test
       use:
-          - alap
+          - anap
       url: http://cp.cloudflare.com/
       interval: 300
-    - name: ssst
-      type: url-test
-      use:
-          - sssp
-      url: http://cp.cloudflare.com/
-      interval: 300
+      tolerance: 1000
+      lazy: true
 
 proxy-providers:
-    # mmcp:
-    #     type: http
-    #     url: "https://raw.githubusercontent.com/mehdimoghaddam-cell/clash-subscription/main/mehdimoghaddam-cell.yaml"
-    #     interval: 3600
-    #     path: ./mmc.yaml
-    #     health-check:
-    #         enable: true
-    #         interval: 600
-    #         url: http://cp.cloudflare.com/
     ssap:
         type: http
         url: "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.yml"
@@ -187,27 +187,19 @@ proxy-providers:
             enable: true
             interval: 600
             url: http://cp.cloudflare.com/
-    alap:
+    anap:
         type: http
-        url: "https://raw.githubusercontent.com/aliahmadiALA/SurfShark_ALA/main/(SurfShark_ALA).yaml"
+        url: "https://anaer.github.io/Sub/clash.yaml"
         interval: 3600
-        path: ./ala.yaml
-        health-check:
-            enable: true
-            interval: 600
-            url: http://cp.cloudflare.com/
-
-    sssp:
-        type: http
-        url: "https://raw.githubusercontent.com/ssrsub/ssr/master/Clash.yml"
-        interval: 3600
-        path: ./sss.yaml
+        path: ./ana.yaml
         health-check:
             enable: true
             interval: 600
             url: http://cp.cloudflare.com/
 
 rules:
+    - GEOIP,private,DIRECT,no-resolve
+    - GEOIP,LAN,DIRECT,no-resolve
     - DOMAIN-SUFFIX,local,DIRECT
     - DOMAIN-SUFFIX,ir,DIRECT
     - GEOIP,IR,DIRECT
