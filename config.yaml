@@ -134,40 +134,30 @@ proxy-groups:
           - anap
       url: http://cp.cloudflare.com/
       interval: 300
-      tolerance: 1000
-      lazy: true
     - name: ssat
       type: url-test
       use:
           - ssap
       url: http://cp.cloudflare.com/
       interval: 300
-      tolerance: 1000
-      lazy: true
     - name: aznt
       type: url-test
       use:
           - aznp
       url: http://cp.cloudflare.com/
       interval: 300
-      tolerance: 1000
-      lazy: true
     - name: ssst
       type: url-test
       use:
           - sssp
       url: http://cp.cloudflare.com/
       interval: 300
-      tolerance: 1000
-      lazy: true
     - name: anat
       type: url-test
       use:
           - anap
       url: http://cp.cloudflare.com/
       interval: 300
-      tolerance: 1000
-      lazy: true
 
 proxy-providers:
     ssap:
