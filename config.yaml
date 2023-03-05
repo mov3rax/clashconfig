@@ -140,6 +140,11 @@ proxy-groups:
       lazy: true
     - name: "fallback-auto"
       type: fallback
+      use:
+          - ssap
+          - aznp
+          - sssp
+          - anap
       url: http://cp.cloudflare.com/
       interval: 5
       tolerance: 1000
