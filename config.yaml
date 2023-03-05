@@ -120,7 +120,6 @@ proxy-groups:
       type: select
       proxies:
           - mixt
-          - manual
           - ssat
           - aznt
           - ssst
