@@ -124,6 +124,7 @@ proxy-groups:
           - manual
           - ssat
           - aznt
+          - ssst
           - anat
           - DIRECT
     - name: mixt
@@ -131,18 +132,18 @@ proxy-groups:
       use:
           - ssap
           - aznp
+          - sssp
           - anap
       url: http://cp.cloudflare.com/
       interval: 300
       tolerance: 1000
       lazy: true
     - name: "fallback-auto"
-        type: fallback
-        url: http://cp.cloudflare.com/
-        interval: 5
-        tolerance: 1000
-        lazy: false
-    proxies
+      type: fallback
+      url: http://cp.cloudflare.com/
+      interval: 5
+      tolerance: 1000
+      lazy: false
     - name: ssat
       type: url-test
       use:
@@ -155,6 +156,14 @@ proxy-groups:
       type: url-test
       use:
           - aznp
+      url: http://cp.cloudflare.com/
+      interval: 300
+      tolerance: 1000
+      lazy: true
+    - name: ssst
+      type: url-test
+      use:
+          - sssp
       url: http://cp.cloudflare.com/
       interval: 300
       tolerance: 1000
@@ -183,6 +192,15 @@ proxy-providers:
         url: "https://raw.githubusercontent.com/AzadNetCH/Clash/main/AzadNet.yml"
         interval: 3600
         path: ./azn.yaml
+        health-check:
+            enable: true
+            interval: 600
+            url: http://cp.cloudflare.com/
+    sssp:
+        type: http
+        url: "https://raw.githubusercontent.com/ssrsub/ssr/master/Clash.yml"
+        interval: 3600
+        path: ./sss.yaml
         health-check:
             enable: true
             interval: 600
