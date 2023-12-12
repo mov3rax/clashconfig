@@ -171,7 +171,7 @@ proxy-providers:
             url: http://cp.cloudflare.com/
     aznp:
         type: http
-        url: "https://raw.githubusercontent.com/AzadNetCH/Clash/main/AzadNet.yml"
+        url: "https://raw.githubusercontent.com/AzadNetCH/Clash/main/AzadNet_META_IRAN-Direct.yml"
         interval: 3600
         path: ./azn.yaml
         health-check:
