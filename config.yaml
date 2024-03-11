@@ -121,7 +121,7 @@ proxy-groups:
       proxies:
           - mixt
           - ssat
-          - aznt
+#          - aznt
           - ssst
           - anat
           - DIRECT
@@ -129,7 +129,7 @@ proxy-groups:
       type: url-test
       use:
           - ssap
-          - aznp
+#          - aznp
           - sssp
           - anap
       url: http://cp.cloudflare.com/
@@ -140,12 +140,12 @@ proxy-groups:
           - ssap
       url: http://cp.cloudflare.com/
       interval: 300
-    - name: aznt
-      type: url-test
-      use:
-          - aznp
-      url: http://cp.cloudflare.com/
-      interval: 300
+#    - name: aznt
+#      type: url-test
+#      use:
+#          - aznp
+#      url: http://cp.cloudflare.com/
+#      interval: 300
     - name: ssst
       type: url-test
       use:
@@ -169,15 +169,15 @@ proxy-providers:
             enable: true
             interval: 600
             url: http://cp.cloudflare.com/
-    aznp:
-        type: http
-        url: "https://raw.githubusercontent.com/AzadNetCH/Clash/main/AzadNet_META_IRAN-Direct.yml"
-        interval: 3600
-        path: ./azn.yaml
-        health-check:
-            enable: true
-            interval: 600
-            url: http://cp.cloudflare.com/
+#    aznp:
+#        type: http
+#        url: "https://raw.githubusercontent.com/AzadNetCH/Clash/main/AzadNet_META_IRAN-Direct.yml"
+#        interval: 3600
+#        path: ./azn.yaml
+#        health-check:
+#            enable: true
+#            interval: 600
+#            url: http://cp.cloudflare.com/
     sssp:
         type: http
         url: "https://raw.githubusercontent.com/ssrsub/ssr/master/Clash.yml"
