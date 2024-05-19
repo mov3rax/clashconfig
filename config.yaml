@@ -129,6 +129,7 @@ proxy-groups:
       type: url-test
       use:
           - ssap
+          - tvcp
 #          - aznp
           - sssp
           - anap
@@ -138,6 +139,12 @@ proxy-groups:
       type: url-test
       use:
           - ssap
+      url: http://cp.cloudflare.com/
+      interval: 300
+    - name: tvct
+      type: url-test
+      use:
+          - tvcp
       url: http://cp.cloudflare.com/
       interval: 300
 #    - name: aznt
@@ -169,6 +176,16 @@ proxy-providers:
             enable: true
             interval: 600
             url: http://cp.cloudflare.com/
+    tvcp:
+        type: http
+        url: "https://raw.githubusercontent.com/yebekhe/TVC/main/subscriptions/meta/mix"
+        interval: 3600
+        path: ./tvc.yaml
+        health-check:
+            enable: true
+            interval: 600
+            url: http://cp.cloudflare.com/
+
 #    aznp:
 #        type: http
 #        url: "https://raw.githubusercontent.com/AzadNetCH/Clash/main/AzadNet_META_IRAN-Direct.yml"
