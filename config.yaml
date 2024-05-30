@@ -206,7 +206,7 @@ proxy-providers:
             url: http://cp.cloudflare.com/
     anap:
         type: http
-        url: "https://anaer.github.io/Sub/clash.yaml"
+        url: "https://raw.githubusercontent.com/anaer/Sub/main/mihomo.yaml"
         interval: 3600
         path: ./ana.yaml
         health-check:
